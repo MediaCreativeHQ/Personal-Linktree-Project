@@ -1,398 +1,566 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Your Neon Pink Link Hub</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
-
-		body {
-			min-height: 100vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			padding: 20px;
-			background: linear-gradient(135deg, #1a001a 0%, #330033 50%, #4d004d 100%);
-			position: relative;
-			overflow-x: hidden;
-		}
-
-		/* Pink Glowing Spheres */
-		.sphere {
-			position: absolute;
-			border-radius: 50%;
-			filter: blur(3px);
-			opacity: 0.6;
-			z-index: 0;
-			animation: float 8s infinite ease-in-out;
-		}
-		.sphere1 {
-			width: 120px;
-			height: 120px;
-			top: 10%;
-			left: 5%;
-			background: radial-gradient(circle at 30% 30%, #ff00ff 60%, #1a001a 100%);
-			animation-delay: 0s;
-			box-shadow: 0 0 40px #ff00ff;
-		}
-		.sphere2 {
-			width: 80px;
-			height: 80px;
-			top: 70%;
-			left: 80%;
-			background: radial-gradient(circle at 60% 60%, #ff66cc 60%, #330033 100%);
-			animation-delay: 2s;
-			box-shadow: 0 0 30px #ff66cc;
-		}
-		.sphere3 {
-			width: 60px;
-			height: 60px;
-			top: 50%;
-			left: 50%;
-			background: radial-gradient(circle at 50% 50%, #ff99ff 60%, #4d004d 100%);
-			animation-delay: 4s;
-			box-shadow: 0 0 20px #ff99ff;
-		}
-		@keyframes float {
-			0%, 100% { transform: translateY(0) scale(1); }
-			50% { transform: translateY(-30px) scale(1.1); }
-		}
-
-		/* Hearts Animation */
-		.heart {
-			position: absolute;
-			font-size: 20px;
-			color: #ff66cc;
-			text-shadow: 0 0 10px #ff00ff;
-			opacity: 0;
-			z-index: 0;
-			animation: fall 10s linear infinite;
-		}
-		@keyframes fall {
-			0% {
-				top: -10%;
-				opacity: 0;
-				transform: translateX(0) rotate(0deg);
-			}
-			10% {
-				opacity: 1;
-			}
-			90% {
-				opacity: 0.5;
-			}
-			100% {
-				top: 110%;
-				opacity: 0;
-				transform: translateX(100px) rotate(360deg);
-			}
-		}
-
-		.container {
-			width: 100%;
-			max-width: 500px;
-			background: rgba(255, 192, 203, 0.1);
-			border-radius: 24px;
-			box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-			backdrop-filter: blur(12px);
-			-webkit-backdrop-filter: blur(12px);
-			border: 1px solid rgba(255, 105, 180, 0.4);
-			padding: 32px 20px;
-			margin: 20px;
-			position: relative;
-			z-index: 1;
-		}
-
-		.profile {
-			text-align: center;
-			margin-bottom: 32px;
-		}
-
-		.profile-img {
-			width: 120px;
-			height: 120px;
-			border-radius: 50%;
-			object-fit: cover;
-			border: 4px solid rgba(255, 0, 255, 0.5);
-			margin: 0 auto 18px;
-			background: rgba(255, 182, 193, 0.3);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-			animation: pulse 2s infinite alternate;
-		}
-
-		@keyframes pulse {
-			0% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.4); }
-			100% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.8); }
-		}
-
-		.profile-img i {
-			font-size: 54px;
-			color: #ff00ff;
-			text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
-		}
-
-		.username {
-			font-size: 26px;
-			font-weight: 700;
-			margin-bottom: 7px;
-			color: #fff;
-			text-shadow: 0 0 10px #ff66cc;
-		}
-
-		.bio {
-			color: #ffccff;
-			font-size: 17px;
-			margin-bottom: 22px;
-			text-shadow: 0 0 5px #ff00ff;
-		}
-
-		.links {
-			display: flex;
-			flex-direction: column;
-			gap: 18px;
-		}
-
-		.link {
-			display: flex;
-			align-items: center;
-			background: rgba(255, 105, 180, 0.2);
-			padding: 16px 22px;
-			border-radius: 14px;
-			text-decoration: none;
-			color: #fff;
-			font-weight: 500;
-			box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
-			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-			border: 1px solid rgba(255, 0, 255, 0.3);
-			position: relative;
-		}
-
-		.link:hover {
-			transform: translateY(-3px) scale(1.03);
-			box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
-			background: rgba(255, 0, 255, 0.25);
-		}
-
-		.link-icon {
-			width: 34px;
-			height: 34px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-right: 16px;
-			background: linear-gradient(135deg, #ff00ff 0%, #ff66cc 100%);
-			color: #fff;
-			border-radius: 10px;
-			box-shadow: 0 0 15px #ff00ff;
-			animation: iconGlow 2s infinite alternate;
-		}
-
-		@keyframes iconGlow {
-			0% { box-shadow: 0 0 10px #ff00ff; }
-			100% { box-shadow: 0 0 20px #ff66cc, 0 0 30px #ff00ff; }
-		}
-
-		.link-text {
-			flex: 1;
-		}
-
-		.link-arrow {
-			color: #ff00ff;
-			text-shadow: 0 0 8px #ff00ff;
-		}
-
-		.social-icons {
-			display: flex;
-			justify-content: center;
-			gap: 18px;
-			margin-top: 36px;
-		}
-
-		.social-icon {
-			width: 44px;
-			height: 44px;
-			border-radius: 50%;
-			background: linear-gradient(135deg, #ff00ff 0%, #ff66cc 100%);
-			color: #fff;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-decoration: none;
-			box-shadow: 0 0 15px #ff00ff;
-			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-			animation: socialPulse 3s infinite alternate;
-		}
-
-		@keyframes socialPulse {
-			0% { transform: scale(1); box-shadow: 0 0 15px #ff00ff; }
-			100% { transform: scale(1.1); box-shadow: 0 0 25px #ff66cc, 0 0 35px #ff00ff; }
-		}
-
-		.social-icon:hover {
-			transform: scale(1.15);
-			background: linear-gradient(135deg, #ff66cc 0%, #ff00ff 100%);
-		}
-
-		.footer {
-			text-align: center;
-			margin-top: 36px;
-			color: #ffccff;
-			font-size: 15px;
-			text-shadow: 0 0 5px #ff00ff;
-		}
-
-		@media (max-width: 600px) {
-			.container {
-				max-width: 95vw;
-				padding: 20px 15px;
-			}
-			.profile-img {
-				width: 100px;
-				height: 100px;
-			}
-			.profile-img i {
-				font-size: 40px;
-			}
-			.username {
-				font-size: 22px;
-			}
-			.bio {
-				font-size: 16px;
-			}
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Brand Hub | Creative Techpreneur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --burgundy: #7F001F;
+            --ivory: #FFFCEF;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --accent: #7F001F;
+            --text-dark: #2D2D2D;
+            --text-light: #7F001F;
+            --radius: 16px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--ivory) 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', 'Inter', 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto 0 auto;
+            padding: 32px 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 32px rgba(127,0,31,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            border: 4px solid var(--burgundy);
+            box-shadow:
+                0 0 24px 4px var(--burgundy),
+                0 0 48px 8px var(--ivory),
+                0 0 80px 16px #a8002c;
+            transition: box-shadow 0.3s;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--burgundy);
+            margin-bottom: 18px;
+            box-shadow: 0 4px 20px rgba(127,0,31,0.2);
+        }
+        .name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            font-weight: 600;
+            background: linear-gradient(45deg, var(--burgundy), #a8002c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: inline-block;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--ivory);
+            color: var(--burgundy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(127,0,31,0.15);
+        }
+        .social-icon:hover {
+            background: var(--burgundy);
+            color: var(--ivory);
+            transform: translateY(-3px) scale(1.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .nav-item {
+            padding: 12px 24px;
+            border-radius: 30px;
+            background: var(--ivory);
+            color: var(--burgundy);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .nav-item.active, .nav-item:hover {
+            background: var(--burgundy);
+            color: var(--ivory);
+            border-color: var(--ivory);
+            transform: translateY(-2px);
+        }
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(127,0,31,0.1);
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(127,0,31,0.2);
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: var(--ivory);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(127,0,31,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(127,0,31,0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(127,0,31,0.15);
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--burgundy);
+        }
+        .card-price {
+            font-weight: 600;
+            color: var(--accent);
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--burgundy);
+            color: var(--ivory);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .btn:hover {
+            background: #a8002c;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--burgundy);
+            color: var(--burgundy);
+        }
+        .btn-outline:hover {
+            background: var(--burgundy);
+            color: var(--ivory);
+        }
+        .footer {
+            text-align: center;
+            padding: 32px 0 0 0;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-top: 20px;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 340px;
+            background: var(--ivory);
+            font-size: 2rem;
+            color: var(--burgundy);
+            font-weight: 700;
+        }
+        .video-container span {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        .tiktok-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .tiktok-card {
+            background: var(--ivory);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(127,0,31,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(127,0,31,0.1);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .tiktok-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(127,0,31,0.15);
+        }
+        .tiktok-icon {
+            font-size: 2.5rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px 15px;
+                gap: 30px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .tiktok-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-container {
+                height: 250px;
+                font-size: 1.3rem;
+            }
+            .nav-item {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .tagline {
+                font-size: 1.1rem;
+            }
+        }
+        button:focus, a:focus {
+            outline: 2px solid var(--burgundy);
+            outline-offset: 2px;
+        }
+        .spacer {
+            height: 30px;
+        }
+        .divider {
+            height: 2px;
+            background: rgba(127,0,31,0.1);
+            margin: 30px 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-	<div class="sphere sphere1"></div>
-	<div class="sphere sphere2"></div>
-	<div class="sphere sphere3"></div>
-    
-	<!-- Animated hearts -->
-	<div class="heart" style="left: 10%; animation-delay: 0s;">❤</div>
-	<div class="heart" style="left: 20%; animation-delay: 2s;">❤</div>
-	<div class="heart" style="left: 30%; animation-delay: 4s;">❤</div>
-	<div class="heart" style="left: 40%; animation-delay: 6s;">❤</div>
-	<div class="heart" style="left: 50%; animation-delay: 8s;">❤</div>
-	<div class="heart" style="left: 60%; animation-delay: 10s;">❤</div>
-	<div class="heart" style="left: 70%; animation-delay: 12s;">❤</div>
-	<div class="heart" style="left: 80%; animation-delay: 14s;">❤</div>
-	<div class="heart" style="left: 90%; animation-delay: 16s;">❤</div>
-    
-	<div class="container">
-		<div class="profile">
-			<div class="profile-img">
-				<i class="fas fa-user"></i>
-			</div>
-			<h1 class="username">@YourUsername</h1>
-			<p class="bio">Digital Creator | Content Specialist | Follow my journey</p>
-		</div>
-        
-		<div class="links">
-			<a href="#" class="link">
-				<div class="link-icon">
-					<i class="fab fa-youtube"></i>
-				</div>
-				<div class="link-text">YouTube Channel</div>
-				<div class="link-arrow">
-					<i class="fas fa-chevron-right"></i>
-				</div>
-			</a>
-            
-			<a href="#" class="link">
-				<div class="link-icon">
-					<i class="fab fa-instagram"></i>
-				</div>
-				<div class="link-text">Instagram Profile</div>
-				<div class="link-arrow">
-					<i class="fas fa-chevron-right"></i>
-				</div>
-			</a>
-            
-			<a href="#" class="link">
-				<div class="link-icon">
-					<i class="fab fa-tiktok"></i>
-				</div>
-				<div class="link-text">TikTok Videos</div>
-				<div class="link-arrow">
-					<i class="fas fa-chevron-right"></i>
-				</div>
-			</a>
-            
-			<a href="#" class="link">
-				<div class="link-icon">
-					<i class="fas fa-blog"></i>
-				</div>
-				<div class="link-text">Personal Blog</div>
-				<div class="link-arrow">
-					<i class="fas fa-chevron-right"></i>
-				</div>
-			</a>
-            
-			<a href="#" class="link">
-				<div class="link-icon">
-					<i class="fas fa-store"></i>
-				</div>
-				<div class="link-text">My Shop</div>
-				<div class="link-arrow">
-					<i class="fas fa-chevron-right"></i>
-				</div>
-			</a>
-		</div>
-        
-		<div class="social-icons">
-			<a href="#" class="social-icon">
-				<i class="fab fa-facebook-f"></i>
-			</a>
-			<a href="#" class="social-icon">
-				<i class="fab fa-twitter"></i>
-			</a>
-			<a href="#" class="social-icon">
-				<i class="fab fa-linkedin-in"></i>
-			</a>
-			<a href="#" class="social-icon">
-				<i class="fab fa-pinterest-p"></i>
-			</a>
-		</div>
-        
-		<div class="footer">
-			<p>© 2023 Your Name. All rights reserved.</p>
-		</div>
-	</div>
-
-	<script>
-		// Simple animation for page load
-		document.addEventListener('DOMContentLoaded', function() {
-			const links = document.querySelectorAll('.link');
-			links.forEach((link, index) => {
-				link.style.opacity = 0;
-				link.style.transform = 'translateY(20px)';
-				setTimeout(() => {
-					link.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-					link.style.opacity = 1;
-					link.style.transform = 'translateY(0)';
-				}, 100 + (index * 100));
-			});
-            
-			// Create more hearts for animation
-			for (let i = 0; i < 15; i++) {
-				const heart = document.createElement('div');
-				heart.className = 'heart';
-				heart.innerHTML = '❤';
-				heart.style.left = Math.random() * 100 + '%';
-				heart.style.animationDelay = Math.random() * 20 + 's';
-				document.body.appendChild(heart);
-			}
-		});
-	</script>
+    <div class="container">
+        <header>
+            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Your Photo" class="profile-photo">
+            <div class="name">Your Name</div>
+            <div class="tagline">Black Creative Techpreneur | Brand Architect</div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                <a href="#" class="social-icon"><i class="fas fa-lemon"></i></a>
+            </div>
+        </header>
+        <nav>
+            <a href="#home" class="nav-item active">Home</a>
+            <a href="#services" class="nav-item">Services</a>
+            <a href="#digital" class="nav-item">Digital Products</a>
+            <a href="#shop" class="nav-item">Shop</a>
+            <a href="#tiktok" class="nav-item">TikTok/Content</a>
+            <a href="#contact" class="nav-item">Book Me</a>
+        </nav>
+        <section id="home" class="section">
+            <div class="section-title"><i class="fas fa-play-circle"></i> Welcome Video</div>
+            <div class="video-container">
+                <span>Coming Soon</span>
+            </div>
+            <div class="divider"></div>
+            <div class="section-title"><i class="fas fa-link"></i> Quick Links</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Latest TikTok</div>
+                    <div>Check out my most recent viral video</div>
+                    <a href="#" class="btn">Watch Now</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Free Resource</div>
+                    <div>Download my branding checklist</div>
+                    <a href="#" class="btn">Get It Free</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Book a Call</div>
+                    <div>15-minute free consultation</div>
+                    <a href="#" class="btn">Schedule Now</a>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="section-title"><i class="fas fa-hand-holding-usd"></i> Recommended Tools & Resources</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Canva Pro</div>
+                    <div>Design tool I use for all my graphics</div>
+                    <a href="#" class="btn">Get Discount</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Shopify</div>
+                    <div>Platform for your online store</div>
+                    <a href="#" class="btn">Start Free Trial</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">ConvertKit</div>
+                    <div>Email marketing for creators</div>
+                    <a href="#" class="btn">Try For Free</a>
+                </div>
+            </div>
+        </section>
+        <section id="services" class="section" style="display:none;">
+            <div class="section-title"><i class="fas fa-briefcase"></i> My Services</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Business Plan Development</div>
+                    <div>Comprehensive business plans tailored to your vision</div>
+                    <div class="card-price">Starting at $500</div>
+                    <a href="#contact" class="btn">Book Consultation</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Brand Identity Design</div>
+                    <div>Logo, color palette, and brand guidelines</div>
+                    <div class="card-price">Starting at $800</div>
+                    <a href="#contact" class="btn">Book Consultation</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Social Media Strategy</div>
+                    <div>Content plan and growth strategy for your platforms</div>
+                    <div class="card-price">Starting at $300/month</div>
+                    <a href="#contact" class="btn">Book Consultation</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Grant Writing</div>
+                    <div>Professional grant applications for creative projects</div>
+                    <div class="card-price">Starting at $750</div>
+                    <a href="#contact" class="btn">Book Consultation</a>
+                </div>
+            </div>
+        </section>
+        <section id="digital" class="section" style="display:none;">
+            <div class="section-title"><i class="fas fa-file-download"></i> Digital Products</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Branding Template Pack</div>
+                    <div>Canva templates for consistent branding</div>
+                    <div class="card-price">$47</div>
+                    <a href="#" class="btn">Purchase & Download</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Content Planning System</div>
+                    <div>Notion template for content creators</div>
+                    <div class="card-price">$29</div>
+                    <a href="#" class="btn">Purchase & Download</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">E-commerce Starter Guide</div>
+                    <div>Step-by-step guide to launching your online store</div>
+                    <div class="card-price">$39</div>
+                    <a href="#" class="btn">Purchase & Download</a>
+                </div>
+            </div>
+        </section>
+        <section id="shop" class="section" style="display:none;">
+            <div class="section-title"><i class="fas fa-shopping-bag"></i> Shop</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Signature T-Shirt</div>
+                    <div>Premium cotton shirt with unique design</div>
+                    <div class="card-price">$29.99</div>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Makeup Collection</div>
+                    <div>Curated beauty products for creative professionals</div>
+                    <div class="card-price">$49.99</div>
+                    <a href="#" class="btn">Add to Cart</a>
+                </div>
+                <div class="card">
+                    <div class="card-title">Halloween Special</div>
+                    <div>Limited edition seasonal products</div>
+                    <div class="card-price">From $14.99</div>
+                    <a href="#" class="btn">View Collection</a>
+                </div>
+            </div>
+        </section>
+        <section id="tiktok" class="section" style="display:none;">
+            <div class="section-title"><i class="fab fa-tiktok"></i> TikTok & Content</div>
+            <div style="margin-bottom: 20px; text-align: center;">Check out my latest content and connect with me on TikTok!</div>
+            <div class="tiktok-grid">
+                <div class="tiktok-card">
+                    <i class="fab fa-tiktok tiktok-icon"></i>
+                    <div class="card-title">Latest Video</div>
+                    <div>Trending content</div>
+                    <a href="#" class="btn" style="margin-top: 15px;">Watch Now</a>
+                </div>
+                <div class="tiktok-card">
+                    <i class="fab fa-tiktok tiktok-icon"></i>
+                    <div class="card-title">Brand Tips</div>
+                    <div>Quick branding advice</div>
+                    <a href="#" class="btn" style="margin-top: 15px;">Learn More</a>
+                </div>
+                <div class="tiktok-card">
+                    <i class="fab fa-tiktok tiktok-icon"></i>
+                    <div class="card-title">Behind Scenes</div>
+                    <div>My creative process</div>
+                    <a href="#" class="btn" style="margin-top: 15px;">View</a>
+                </div>
+                <div class="tiktok-card">
+                    <i class="fab fa-tiktok tiktok-icon"></i>
+                    <div class="card-title">TikTok Shop</div>
+                    <div>Featured products</div>
+                    <a href="#" class="btn" style="margin-top: 15px;">Shop Now</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#" class="btn btn-outline">
+                    <i class="fab fa-tiktok"></i> Follow Me on TikTok
+                </a>
+            </div>
+        </section>
+        <section id="contact" class="section" style="display:none;">
+            <div class="section-title"><i class="fas fa-calendar-alt"></i> Book a Consultation</div>
+            <form id="booking-form" style="max-width: 500px; margin: 0 auto;">
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600;">Your Name</label>
+                    <input type="text" id="name" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: var(--ivory); color: var(--text-dark); font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600;">Your Email</label>
+                    <input type="email" id="email" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: var(--ivory); color: var(--text-dark); font-size: 1rem;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="service" style="display: block; margin-bottom: 8px; font-weight: 600;">Service Interested In</label>
+                    <select id="service" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: var(--ivory); color: var(--text-dark); font-size: 1rem;">
+                        <option value="">Select a service</option>
+                        <option value="business-plan">Business Plan Development</option>
+                        <option value="branding">Brand Identity Design</option>
+                        <option value="social-media">Social Media Strategy</option>
+                        <option value="grant-writing">Grant Writing</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 25px;">
+                    <label for="message" style="display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
+                    <textarea id="message" rows="4" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: var(--ivory); color: var(--text-dark); font-size: 1rem;"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Submit Booking Request</button>
+            </form>
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="margin-bottom: 15px;">Or book directly through my calendar:</p>
+                <a href="#" class="btn btn-outline">View Available Times</a>
+            </div>
+        </section>
+        <footer class="footer">
+            <div>© 2023 Your Name. All rights reserved.</div>
+            <div style="margin: 10px 0; font-weight: 600;">Black Creative Techpreneur | Brand Architect | AI + Culture + Design</div>
+            <div class="social-icons" style="margin-top: 15px;">
+                <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                <a href="#" class="social-icon"><i class="fas fa-lemon"></i></a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                        section.style.opacity = 0;
+                    });
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    targetSection.style.display = 'block';
+                    setTimeout(() => {
+                        targetSection.style.opacity = 1;
+                    }, 50);
+                });
+            });
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('home').style.opacity = 1;
+            document.getElementById('booking-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you! Your booking request has been submitted. I will contact you soon to confirm details.');
+                this.reset();
+            });
+        });
+    </script>
 </body>
 </html>
+
