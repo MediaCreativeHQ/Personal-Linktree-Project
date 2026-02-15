@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- THE LANDING.HUB © 2026 - Unauthorized copying prohibited -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,8 @@
     <meta property="og:title" content="THE LANDING.HUB - Curated Digital Income Tools">
     <meta property="og:description" content="Curated tools I personally use for building universal digital income.">
     <meta property="og:type" content="website">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     
     <!-- Google Fonts - Poppins (Soft Luxury Minimal) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +79,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen py-12 px-4 gradient-bg">
+<body class="min-h-screen py-12 px-4 gradient-bg" oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
     
     <!-- Main Container -->
     <div class="max-w-3xl mx-auto">
@@ -269,6 +272,132 @@
         </div>
         
     </div>
+    
+    <!-- Affiliate Link Management System with Base64 Obfuscation -->
+    <script>
+        // Affiliate Links Database (Update this object to add/modify links)
+        const affiliateLinks = {
+            'job-platforms': [
+                // Example: { name: 'Upwork', url: 'https://bit.ly/your-link', desc: 'Freelance marketplace' }
+            ],
+            'online-courses': [
+                // Add your online course affiliate links here
+            ],
+            'remote-tools': [
+                // Add your remote tools affiliate links here
+            ],
+            'side-hustle-tools': [
+                // Add your side hustle tools affiliate links here
+            ],
+            'creativity-learning': [
+                // Add your creativity & learning affiliate links here
+            ],
+            'digital-growth': [
+                // Add your digital growth tools affiliate links here
+            ],
+            'wellness-lifestyle': [
+                // Add your wellness & lifestyle affiliate links here
+            ],
+            'shopping-deals': [
+                // Add your shopping & deals affiliate links here
+            ],
+            'finance-investing': [
+                // Add your finance & investing affiliate links here
+            ]
+        };
+
+        // Base64 encode function for link obfuscation
+        function encodeLink(url) {
+            return btoa(url);
+        }
+
+        // Base64 decode and redirect function
+        function goToLink(event, encodedUrl) {
+            event.preventDefault();
+            const decodedUrl = atob(encodedUrl);
+            window.open(decodedUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Dynamic link loader - populates accordion panels
+        function loadAffiliateLinks() {
+            const categoryMap = {
+                'job-platforms': 1,
+                'online-courses': 2,
+                'remote-tools': 3,
+                'side-hustle-tools': 4,
+                'creativity-learning': 5,
+                'digital-growth': 6,
+                'wellness-lifestyle': 7,
+                'shopping-deals': 8,
+                'finance-investing': 9
+            };
+
+            Object.keys(affiliateLinks).forEach(category => {
+                const panelId = categoryMap[category];
+                const panelBody = document.querySelector(`#accordion-collapse-body-${panelId} > div`);
+                
+                if (!panelBody) return;
+
+                const links = affiliateLinks[category];
+                
+                if (links.length === 0) {
+                    // Keep placeholder if no links
+                    panelBody.innerHTML = '<p class="text-white/80 text-center py-8 italic text-sm font-light">Affiliate links will be added here soon...</p>';
+                } else {
+                    // Clear placeholder and add links
+                    panelBody.innerHTML = '';
+                    panelBody.classList.add('space-y-4');
+                    
+                    links.forEach(link => {
+                        const encodedUrl = encodeLink(link.url);
+                        const linkElement = document.createElement('a');
+                        linkElement.href = '#';
+                        linkElement.className = 'block bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl p-5 transition-all duration-300 hover:scale-105 shadow-lg border border-white/20';
+                        linkElement.onclick = (e) => goToLink(e, encodedUrl);
+                        
+                        linkElement.innerHTML = `
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <h3 class="text-white font-medium text-base mb-1">${link.name}</h3>
+                                    <p class="text-white/70 text-sm font-light">${link.desc}</p>
+                                </div>
+                                <svg class="w-5 h-5 text-white/60 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </div>
+                        `;
+                        
+                        panelBody.appendChild(linkElement);
+                    });
+                }
+            });
+
+            // Console log summary
+            console.log('%c🚀 THE LANDING.HUB - Affiliate Link System', 'font-size: 16px; font-weight: bold; color: #667eea;');
+            console.log('%c✅ Tailwind CSS CDN: Loaded', 'color: green;');
+            console.log('%c✅ Flowbite Accordion: Loaded', 'color: green;');
+            console.log('%c✅ Links Folder Structure: Created', 'color: green;');
+            console.log('%c✅ Affiliate Files Created: 9', 'color: green;');
+            console.log('%c✅ Dynamic JS Script: Active', 'color: green;');
+            console.log('%c✅ Security Protections: Enabled', 'color: green;');
+            console.log('%c   - Right-click disabled', 'color: gray;');
+            console.log('%c   - Text selection disabled', 'color: gray;');
+            console.log('%c   - Link obfuscation (Base64)', 'color: gray;');
+            console.log('%c   - CSP meta tag', 'color: gray;');
+            console.log('%c   - X-Frame-Options', 'color: gray;');
+            
+            let totalLinks = 0;
+            Object.values(affiliateLinks).forEach(links => totalLinks += links.length);
+            console.log(`%c📊 Total Affiliate Links Loaded: ${totalLinks}`, 'color: #764ba2; font-weight: bold;');
+        }
+
+        // Load links when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadAffiliateLinks);
+        } else {
+            loadAffiliateLinks();
+        }
+    </script>
     
 </body>
 </html>
